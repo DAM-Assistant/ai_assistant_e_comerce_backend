@@ -2,6 +2,13 @@ from models import *
 from sqlalchemy.orm import Session
 import re
 from services import auth
+from jose import jwt
+from datetime import datetime, timedelta
+import sqlite3
+
+SECRET_KEY = "your_secret_key"  # Замените на ваш секретный ключ
+ALGORITHM = "HS256"
+EMAIL_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 часа
 
 
 def change_password(session: Session, current_user: User, current_password: str, new_password: str , confirm_password: str):
@@ -114,4 +121,29 @@ def delete_user(session: Session, user_id: int):
     session.delete(user)
     session.commit()
     return (True, "Deleted User {}".format(user_id))
+
+
+def generate_email_verification_token(user_id: int, email: str):
+    expire = datetime.utcnow() + timedelta(minutes=EMAIL_TOKEN_EXPIRE_MINUTES)
+    to_encode = {"user_id": user_id, "email": email, "exp": expire}
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def verify_email_token(token: str, session: Session):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id = payload.get("user_id")
+        email = payload.get("email")
+        if user_id is None or email is None:
+            return False, "Invalid token"
+        user = session.query(User).filter_by(id=user_id, email=email).first()
+        if not user:
+            return False, "User not found"
+        if user.is_email_verified:
+            return False, "Email already verified"
+        user.is_email_verified = True
+        session.commit()
+        return True, "Email verified successfully"
+    except Exception as e:
+        return False, str(e)
 

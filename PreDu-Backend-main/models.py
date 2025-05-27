@@ -18,6 +18,7 @@ class User(Base):
     email = Column(VARCHAR(100), nullable=False)
     location = Column(VARCHAR(200), nullable=False)
     role = Column(VARCHAR(10), nullable=False) # admin / user
+    is_email_verified = Column(Boolean, default=False)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

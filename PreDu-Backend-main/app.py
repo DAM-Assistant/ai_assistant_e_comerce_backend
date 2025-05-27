@@ -15,10 +15,12 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Здесь указываем точный источник
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=origins,  # Используем все определенные origins
+    allow_credentials=True,  # Разрешаем credentials
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Явно указываем методы
+    allow_headers=["*"],  # Разрешаем все заголовки
+    expose_headers=["*"],  # Добавляем expose_headers
+    max_age=3600,  # Кэшируем preflight запросы на 1 час
 )
 
 app.include_router(auth.router)
