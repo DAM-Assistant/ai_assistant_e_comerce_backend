@@ -1,6 +1,11 @@
 fastapi
 sqlalchemy
-jwt
+PyJWT
 passlib
 python-jose
-langchain
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-openai>=0.0.5
+python-dotenv
+uvicorn
+openai

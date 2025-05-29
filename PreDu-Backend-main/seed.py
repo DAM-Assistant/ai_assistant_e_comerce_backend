@@ -1,7 +1,9 @@
+<<<<<<< HEAD
 from models import *
 from services.auth import get_password_hash
 from sqlalchemy.orm import Session
 from database import create_session
+from datetime import datetime
 
 session = create_session()
 
@@ -16,8 +18,8 @@ categories = [
         "description": "Entertainment Products"
     },
     {
-        "name": "office",
-        "description": "Products for Office uses"
+        "name": "professional",
+        "description": "Professional Tools and Services"
     }
 ]
 
@@ -43,15 +45,15 @@ brands = [
     },
     {
         "name": "chegg",
-        "description": "Student's Best Friend"
+        "description": "Educational Platform"
     },
     {
         "name": "bartleby",
-        "description": "Education is important"
+        "description": "Study Help Platform"
     },
     {
         "name": "canva",
-        "description": "Draw to your hearts desire"
+        "description": "Design Platform"
     },
 ]
 
@@ -74,7 +76,7 @@ products = [
         "description": "For 1 User, 1 Month",
         "cost_per_unit": 69000,
         "image": "https://drive.google.com/uc?export=view&id=1TXT-Tv-vYtTVvXAxVLxXfBEizRyjDWhY",
-        "stock_quantity": 200
+        "stock_quantity": 195
     },
     {
         "category_id": 2,
@@ -83,7 +85,7 @@ products = [
         "description": "For 1 User, 3 Month",
         "cost_per_unit": 169000,
         "image": "https://drive.google.com/uc?export=view&id=1TXT-Tv-vYtTVvXAxVLxXfBEizRyjDWhY",
-        "stock_quantity": 200
+        "stock_quantity": 197
     },
     {
         "category_id": 2,
@@ -101,7 +103,7 @@ products = [
         "description": "For 1 User, 1 Month",
         "cost_per_unit": 49000,
         "image": "https://drive.google.com/uc?export=view&id=1KxuyShsGXEq0Bj7Ala1Nyn-TmwjVlg5b",
-        "stock_quantity": 200
+        "stock_quantity": 150
     },
     {
         "category_id": 1,
@@ -110,7 +112,7 @@ products = [
         "description": "For 1 User, 3 Month",
         "cost_per_unit": 129000,
         "image": "https://drive.google.com/uc?export=view&id=1KxuyShsGXEq0Bj7Ala1Nyn-TmwjVlg5b",
-        "stock_quantity": 200
+        "stock_quantity": 150
     },
     {
         "category_id": 1,
@@ -146,7 +148,7 @@ products = [
         "description": "For 3 User, 6 Month",
         "cost_per_unit": 299000,
         "image": "https://drive.google.com/uc?export=view&id=1VgKhAMK-30kMZY6pF4g0ag39-EXe2n2S",
-        "stock_quantity": 200
+        "stock_quantity": 100
     },
     {
         "category_id": 1,
@@ -155,7 +157,7 @@ products = [
         "description": "For 1 User, 1 Month",
         "cost_per_unit": 59000,
         "image": "https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
-        "stock_quantity": 200
+        "stock_quantity": 100
     },
     {
         "category_id": 1,
@@ -164,7 +166,7 @@ products = [
         "description": "For 1 User, 3 Month",
         "cost_per_unit": 159000,
         "image": "https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
-        "stock_quantity": 200
+        "stock_quantity": 100
     },
     {
         "category_id": 1,
@@ -173,16 +175,16 @@ products = [
         "description": "For 1 User, 6 Month",
         "cost_per_unit": 259000,
         "image": "https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
-        "stock_quantity": 200
+        "stock_quantity": 100
     },
     {
         "category_id": 3,
         "brand_id": 5,
         "name": "Canva 1 Month",
         "description": "For 1 User, 1 Month",
-        "cost_per_unit": 29000,
-        "image": "https://drive.google.com/uc?export=view&id=1Mgvd3WZ6RKDTJU75zzFKJ-4XRIzUH0ay",
-        "stock_quantity": 200
+        "cost_per_unit": 49000,
+        "image": "https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+        "stock_quantity": 100
     },
     {
         "category_id": 3,
@@ -199,8 +201,8 @@ products = [
         "name": "Canva 3 Month",
         "description": "For 1 User, 4 Month",
         "cost_per_unit": 59000,
-        "image": "https://drive.google.com/uc?export=view&id=1Mgvd3WZ6RKDTJU75zzFKJ-4XRIzUH0ay",
-        "stock_quantity": 200
+        "image": "https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+        "stock_quantity": 100
     },
 ]
 
@@ -237,24 +239,26 @@ def seedUsers(session: Session):
 # ===== COUPONS ===== #
 coupons = [
     {
-        "code": "WELCOMEDAM",
-        "type": "percentage", # 1 = fixed, 2 = percentage, 3 = both
+        "code": "WELCOMEPREDU",
+        "type": "percentage",
         "value": 10,
         "min_order_required": 100000,
         "max_discount_applicable": 15000,
         "stock_quantity": 10,
         "limit_per_user": 10,
-        "is_active": True
+        "is_active": True,
+        "created_at": datetime.now()
     },
     {
         "code": "PREDU20K",
-        "type": "fixed", # 1 = fixed, 2 = percentage, 3 = both
+        "type": "fixed",
         "value": 20000,
         "min_order_required": 200000,
         "max_discount_applicable": 20000,
         "stock_quantity": 10,
         "limit_per_user": 5,
-        "is_active": True
+        "is_active": True,
+        "created_at": datetime.now()
     }
 ]
 
@@ -266,14 +270,194 @@ def seedCoupons(session: Session):
                                 min_order_required=coupon["min_order_required"],
                                 max_discount_applicable=coupon["max_discount_applicable"], 
                                 stock_quantity=coupon["stock_quantity"], limit_per_user=coupon["limit_per_user"], 
-                                is_active=coupon["is_active"],)
+                                is_active=coupon["is_active"], created_at=coupon["created_at"])
             session.add(new_coupon)
     session.commit()
 
 
 
-seedCategories(session)
-seedBrands(session)
-seedProducts(session)
-seedCoupons(session)
-seedUsers(session)
+def seed_database():
+    db = create_session()
+    try:
+        # Очищаем существующие данные
+        db.query(Coupon).delete()
+        db.query(Product).delete()
+        db.query(Brand).delete()
+        db.query(Category).delete()
+        
+        # Создаем категории
+        categories = [
+            Category(name="education", description="Educational Products"),
+            Category(name="entertainment", description="Entertainment Products"),
+            Category(name="professional", description="Professional Tools and Services")
+        ]
+        db.add_all(categories)
+        db.commit()
+        
+        # Создаем бренды
+        brands = [
+            Brand(name="netflix", description="Popular Streaming Service"),
+            Brand(name="spotify", description="The best Music Subscription"),
+            Brand(name="chegg", description="Educational Platform"),
+            Brand(name="bartleby", description="Study Help Platform"),
+            Brand(name="canva", description="Design Platform")
+        ]
+        db.add_all(brands)
+        db.commit()
+        
+        # Создаем продукты
+        products = [
+            # Netflix products
+            Product(
+                name="Netflix 1 Month Combo",
+                description="For 1 User, 1 Month",
+                cost_per_unit=69000.0,
+                image="https://drive.google.com/uc?export=view&id=1TXT-Tv-vYtTVvXAxVLxXfBEizRyjDWhY",
+                stock_quantity=195,
+                category_id=2,  # entertainment
+                brand_id=1  # netflix
+            ),
+            Product(
+                name="Netflix 3 Month Combo",
+                description="For 1 User, 3 Months",
+                cost_per_unit=169000.0,
+                image="https://drive.google.com/uc?export=view&id=1TXT-Tv-vYtTVvXAxVLxXfBEizRyjDWhY",
+                stock_quantity=197,
+                category_id=2,  # entertainment
+                brand_id=1  # netflix
+            ),
+            Product(
+                name="Netflix 6 Month Combo",
+                description="For 1 User, 6 Months",
+                cost_per_unit=299000.0,
+                image="https://drive.google.com/uc?export=view&id=1TXT-Tv-vYtTVvXAxVLxXfBEizRyjDWhY",
+                stock_quantity=200,
+                category_id=2,  # entertainment
+                brand_id=1  # netflix
+            ),
+            
+            # Chegg products
+            Product(
+                name="Chegg 1 Month Combo",
+                description="Study Pack for 1 Month",
+                cost_per_unit=49000.0,
+                image="https://drive.google.com/uc?export=view&id=1KxuyShsGXEq0Bj7Ala1Nyn-TmwjVlg5b",
+                stock_quantity=150,
+                category_id=1,  # education
+                brand_id=3  # chegg
+            ),
+            Product(
+                name="Chegg 3 Month Combo",
+                description="Study Pack for 3 Months",
+                cost_per_unit=129000.0,
+                image="https://drive.google.com/uc?export=view&id=1KxuyShsGXEq0Bj7Ala1Nyn-TmwjVlg5b",
+                stock_quantity=150,
+                category_id=1,  # education
+                brand_id=3  # chegg
+            ),
+            
+            # Spotify products
+            Product(
+                name="Spotify Family Combo",
+                description="Family Plan for 6 Users",
+                cost_per_unit=299000.0,
+                image="https://drive.google.com/uc?export=view&id=1VgKhAMK-30kMZY6pF4g0ag39-EXe2n2S",
+                stock_quantity=100,
+                category_id=2,  # entertainment
+                brand_id=2  # spotify
+            ),
+            
+            # Bartleby products
+            Product(
+                name="Bartleby 1 Month Combo",
+                description="Study Help for 1 Month",
+                cost_per_unit=59000.0,
+                image="https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+                stock_quantity=100,
+                category_id=1,  # education
+                brand_id=4  # bartleby
+            ),
+            Product(
+                name="Bartleby 3 Month Combo",
+                description="Study Help for 3 Months",
+                cost_per_unit=159000.0,
+                image="https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+                stock_quantity=100,
+                category_id=1,  # education
+                brand_id=4  # bartleby
+            ),
+            Product(
+                name="Bartleby 6 Month Combo",
+                description="Study Help for 6 Months",
+                cost_per_unit=259000.0,
+                image="https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+                stock_quantity=100,
+                category_id=1,  # education
+                brand_id=4  # bartleby
+            ),
+            
+            # Canva products
+            Product(
+                name="Canva 1 Month",
+                description="Professional Design Tools",
+                cost_per_unit=49000.0,
+                image="https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+                stock_quantity=100,
+                category_id=3,  # professional
+                brand_id=5  # canva
+            ),
+            Product(
+                name="Canva 3 Month",
+                description="Professional Design Tools",
+                cost_per_unit=59000.0,
+                image="https://drive.google.com/uc?export=view&id=1ndEiq9Gi4cuxlxHQN0ARd9GFOoH-JEF9",
+                stock_quantity=100,
+                category_id=3,  # professional
+                brand_id=5  # canva
+            )
+        ]
+        db.add_all(products)
+        db.commit()
+        
+        # Создаем купоны
+        coupons = [
+            Coupon(
+                code="WELCOMEPREDU",
+                type="percentage",
+                value=10.0,
+                min_order_required=100000.0,
+                max_discount_applicable=15000.0,
+                stock_quantity=10,
+                is_active=True,
+                limit_per_user=10,
+                created_at=datetime.now()
+            ),
+            Coupon(
+                code="PREDU20K",
+                type="fixed",
+                value=20000.0,
+                min_order_required=200000.0,
+                max_discount_applicable=20000.0,
+                stock_quantity=10,
+                is_active=True,
+                limit_per_user=5,
+                created_at=datetime.now()
+            )
+        ]
+        db.add_all(coupons)
+        db.commit()
+        
+        print("Database seeded successfully!")
+        
+    except Exception as e:
+        print(f"Error seeding database: {str(e)}")
+        db.rollback()
+    finally:
+        db.close()
+
+if __name__ == "__main__":
+    seed_database()
+=======
+"code": "WELCOMEDAM",
+"code": "DAM20K", 
+>>>>>>> a2c170d6c9cb6d72f604a8309f3eb36c9d04e345
