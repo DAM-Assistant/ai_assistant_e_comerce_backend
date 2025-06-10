@@ -6,14 +6,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Создаем глобальную переменную engine
+engine = create_engine(os.getenv("DB_URL"))
 
 def init_db():
-    engine = create_engine(os.getenv("DB_URL"))
-    Base.metadata.create_all(bind = engine)
-
+    Base.metadata.create_all(bind=engine)
 
 def create_session():
-    engine = create_engine(os.getenv("DB_URL"))
     Session = sessionmaker(bind=engine)
     return Session()
 

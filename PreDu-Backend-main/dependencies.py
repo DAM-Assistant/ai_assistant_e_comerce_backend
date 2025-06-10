@@ -21,10 +21,10 @@ async def get_current_user(token: str = Depends(oauth2_scheme), session: Session
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    success, user_data = users.get_user_by_username(session, username)
-    if user_data is None:
+    success, user_object = users.get_user_by_username(session, username)
+    if not success or user_object is None:
         raise credentials_exception
-    return user_data
+    return user_object
 
 async def authorize_admin_access(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
     credentials_exception = HTTPException(
