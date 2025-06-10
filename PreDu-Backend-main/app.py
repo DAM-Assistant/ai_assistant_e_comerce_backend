@@ -10,7 +10,13 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://yourdomain.com"
+    "https://ai-assistant-e-comerce-frontend.onrender.com",  # Your frontend domain
+    "http://ai-assistant-e-comerce-frontend.onrender.com",   # HTTP version just in case
+    "http://yourdomain.com",
+    "https://yourdomain.com",
+    "http://62.84.32.248",  # Adding your server IP
+    "https://62.84.32.248",  # Adding your server IP with HTTPS
+    "*"  # For development - remove in production
 ]
 
 app.add_middleware(
@@ -35,3 +41,7 @@ app.include_router(chatbot.router)
 @app.on_event("startup")
 async def startup():
     print("\n # ========== DAM ========== #")
+
+@app.get("/")
+def read_root():
+    return {"message": "Добро пожаловать в PreDu! Это backend для онлайн-магазина подписок."}
